@@ -38,6 +38,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'slim-rails'
 gem 'bootstrap', '~> 4.3.1'
+gem 'bootstrap-glyphicons'
+gem 'font-awesome-sass'
 gem 'jquery-rails'
 
 group :development, :test do
