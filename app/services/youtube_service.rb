@@ -1,7 +1,8 @@
 class YoutubeService
   include HTTParty
   base_uri 'https://www.googleapis.com'
-
+  YOUTUBE_REGEX =/(https?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.*(?:watch\?v=)?([-\w]{11})/
+​
   def initialize
     @option = {
       query: {
@@ -11,11 +12,20 @@ class YoutubeService
       }
     }
   end
-
-  def call(*video_id)
+​
+  def take_info_video_by_ids(*video_id)
     @option[:query][:id] = video_id.join(',')
     response = self.class.get("/youtube/v3/videos", @option)
-
-    JSON.parse(response.body)
+    if response.code
+      records = JSON.parse(response.body)['items']
+      { records: records }
+    else
+      error = JSON.parse(response.body)['error']
+      { error: error }
+    end
+  end
+​
+  def take_video_id_by_url(url)
+    url.match(YOUTUBE_REGEX)[6]
   end
 end
