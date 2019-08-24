@@ -1,0 +1,4 @@
+.logged.pull-right
+  span.mr-1 = current_user.email
+  = link_to 'Share video', share_path, class: 'btn btn-warning mr-1'
+  = link_to 'logout', sessions_destroy_path, method: :delete, class: 'btn btn-danger'
