@@ -1,7 +1,9 @@
 class YoutubeService
   include HTTParty
   base_uri 'https://www.googleapis.com'
+
   YOUTUBE_REGEX = /(https?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.*(?:watch\?v=)?([-\w]{11})/
+
   def initialize
     @option = {
       query: {
@@ -23,6 +25,7 @@ class YoutubeService
       { error: error }
     end
   end
+
   def take_video_id_by_url(url)
     url.match(YOUTUBE_REGEX)[6]
   end

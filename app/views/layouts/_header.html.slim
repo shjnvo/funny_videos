@@ -6,9 +6,8 @@ header
           i.fa.fa-home.mr-1
           |Funny Videos
       .col-xs-10.col-sm-8.pt-4
-        form.form-inline
-          input.form-control.mr-1 type='email' placeholder='Enter email'
-          input.form-control.mr-1 type='password' placeholder='Enter password'
-          button.btn.btn-success.mr-1 login
-          button.btn.btn-primary register
+        - if current_user
+          = render 'layouts/logged'
+        - else
+          = render 'layouts/register_form'
   hr.mb-0

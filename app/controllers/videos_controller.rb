@@ -1,4 +1,5 @@
 class VideosController < ApplicationController
+  before_action :authenticate_user, only: :share
   def index
   end
 
