@@ -7,18 +7,18 @@ class VideoForm
   def initialize(url = nil)
     @youtube_service = YoutubeService.new
     @url = url
-    @errors = nil
   end
 
   def submit_by(user)
     return false unless valid?
+
     video_id = @youtube_service.take_video_id_by_url(@url)
     video_info = @youtube_service.take_info_video_by_ids(video_id)
 
     Rails.logger.info(video_info)
 
     if video_info.key?(:error)
-      @errors = video_info[:error]
+      @error = video_info[:error]
     else
       video_info[:records].each do |video|
         Video.create!({
@@ -29,10 +29,7 @@ class VideoForm
       end
     end
 
-    @errors.nil?
+    @error.nil?
   end
 
-  def errors
-    @erros
-  end
 end

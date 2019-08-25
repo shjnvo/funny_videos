@@ -6,7 +6,7 @@ class LikeForm
     @uuid = uuid
     @status = status
     @user = user
-    @errors = nil
+    @error = nil
   end
 
   def submit
@@ -21,19 +21,19 @@ class LikeForm
       if likeable.save
         @youtube_service.video_action_by(@uuid, @status)
       else
-        @error = likeable.errors.full_messages.join(', ')
+        @error = likeable.error.full_messages.join(', ')
       end
     elsif !status_valid?(@status)
-      @errors = "Video action invalid !!!"
+      @error = "Video action invalid !!!"
     else
       @error = "Video of uuid invalid!!!"
     end
 
-    @errors.nil?
+    @error.nil?
   end
 
-  def errors
-    @errors
+  def error
+    @error
   end
 
   private
