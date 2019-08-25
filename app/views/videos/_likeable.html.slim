@@ -1,0 +1,15 @@
+-if current_user
+  - likeable = video.action_by(current_user)
+  span.pull-right
+    - if likeable
+      - if likeable.like?
+        = link_to video_action_path(uuid: video.uuid, status: :dislike), method: :post
+          i.fa.fa-thumbs-down
+      - else
+        = link_to video_action_path(uuid: video.uuid, status: :like), method: :post
+          i.fa.fa-thumbs-up.pr-3
+    - else
+      = link_to video_action_path(uuid: video.uuid, status: :like), method: :post
+        i.fa.fa-thumbs-up.pr-3
+      = link_to video_action_path(uuid: video.uuid, status: :dislike), method: :post
+        i.fa.fa-thumbs-down

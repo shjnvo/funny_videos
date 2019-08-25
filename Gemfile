@@ -43,6 +43,8 @@ gem 'jquery-rails'
 gem 'httparty'
 gem 'toastr-rails', '1.0.3'
 gem 'valid_email'
+gem 'draper'
+gem 'google-api-client', '~> 0.30.8', require: ['google/apis', 'google/apis/youtube_v3', 'googleauth', 'googleauth/stores/file_token_store']
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

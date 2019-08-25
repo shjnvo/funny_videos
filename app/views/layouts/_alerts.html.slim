@@ -1,6 +1,6 @@
 - if notice
     javascript:
-      toastr["success"]("#{notice}");
+      toastr["success"]("#{notice}", '', {"positionClass": "toast-bottom-full-width"});
 - if alert
     javascript:
-      toastr["error"]("#{alert}");
+      toastr["error"]("#{alert}", '', {"positionClass": "toast-bottom-full-width"});

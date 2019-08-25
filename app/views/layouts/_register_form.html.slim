@@ -1,9 +1,3 @@
-/ form.form-inline#user_form
-/   input.form-control.mr-1 type='email' placeholder='Enter email'
-/   input.form-control.mr-1 type='password' placeholder='Enter password'
-/   button.btn.btn-success.mr-1 login
-/   button.btn.btn-primary register
-
 = form_tag sessions_create_path, class: 'form-inline pull-right', id: 'user_form'
   = email_field_tag :email, nil, class: 'form-control mr-1', placeholder: 'Enter email'
   = password_field_tag :password, nil, class: 'form-control mr-1', placeholder: 'Enter password'

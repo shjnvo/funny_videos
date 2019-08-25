@@ -3,13 +3,16 @@
     .card-header.text-center
       h3 Share a youtube video
     .card-body
-      form
+      = form_tag share_path
+        - if @video_form.errors.present?
+          .alert.alert-danger
+            = @video_form.errors.full_messages.join(', ')
         p Youtube URL :
         .input-group.form-group
           .input-group-prepend
             span.input-group-text
               i.fa.fa-link
-          input.form-control placeholder="Youtube URL" type="text"
+          = text_field_tag :url, @video_form.url, placeholder: "Youtube URL", class: "form-control"
         .form-group.text-center
-          input.btn.login_btn type="submit" value="share"
+          button.btn.login_btn type="submit" share
 
