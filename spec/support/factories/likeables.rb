@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :likeable do
-    video { nil }
-    user { nil }
+    association :video
+    association :user
+    status { :like }
   end
 end

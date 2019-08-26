@@ -44,6 +44,9 @@ gem 'httparty'
 gem 'toastr-rails', '1.0.3'
 gem 'valid_email'
 gem 'draper'
+gem 'kaminari'
+
+
 gem 'google-api-client', '~> 0.30.8', require: ['google/apis', 'google/apis/youtube_v3', 'googleauth', 'googleauth/stores/file_token_store']
 
 group :development, :test do
@@ -54,6 +57,7 @@ group :development, :test do
   gem 'capybara', '>= 2.15'
   # Adds support for Capybara system testing and selenium driver
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
 end
