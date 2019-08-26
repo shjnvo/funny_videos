@@ -3,12 +3,8 @@ class VideoDecorator < Draper::Decorator
 
   def initialize(object, options = {})
     super
-    @youtube_service = YoutubeService.new
-    video_info = @youtube_service.take_info_video_by_ids(object.uuid)[:records].first
-    @title = video_info['snippet']['title']
-    @description = video_info['snippet']['description']
-    @like_number = video_info['statistics']['likeCount']
-    @dislike_number = video_info['statistics']['dislikeCount']
+    @video_service = VideoService.new
+    @video_info = @video_service.list_videos({id: object.uuid}).first
   end
 
   def email
@@ -16,18 +12,18 @@ class VideoDecorator < Draper::Decorator
   end
 
   def title
-    @title
+    @video_info.snippet.title
   end
 
   def description
-    @description
+    @video_info.snippet.description
   end
 
   def like_number
-    @like_number
+    @video_info.statistics.like_count
   end
 
   def dislike_number
-    @dislike_number
+    @video_info.statistics.dislike_count
   end
 end

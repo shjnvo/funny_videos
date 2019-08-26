@@ -5,28 +5,29 @@ class VideoForm
   validates :url, format: { with: /(https?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.*(?:watch\?v=)?([-\w]{11})/, message: 'youtube video format invalid!!!!' }
 
   def initialize(url = nil)
-    @youtube_service = YoutubeService.new
+    @video_service = VideoService.new
     @url = url
   end
 
   def submit_by(user)
     return false unless valid?
 
-    video_id = @youtube_service.take_video_id_by_url(@url)
-    video_info = @youtube_service.take_info_video_by_ids(video_id)
+    video_id = @video_service.take_video_id_by_url(@url)
+    opts = { id: video_id }
+    videos = @video_service.list_videos(opts)
 
-    Rails.logger.info(video_info)
+    Rails.logger.info(videos)
 
-    if video_info.key?(:error)
-      @error = video_info[:error]
-    else
-      video_info[:records].each do |video|
+    if videos.present?
+      videos.each do |video|
         Video.create!({
           user_id: user.id,
           uuid: video_id,
           video_url: @url
         })
       end
+    else
+      @error = "We area not match video with URL !!!"
     end
 
     @error.nil?

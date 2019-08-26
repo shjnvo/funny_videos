@@ -1,4 +1,4 @@
-class AuthService
+module AuthService
   # REPLACE WITH VALID REDIRECT_URI FOR YOUR CLIENT
   REDIRECT_URI = 'http://localhost'
   APPLICATION_NAME = 'funny_videos'
@@ -12,6 +12,8 @@ class AuthService
 
   # SCOPE FOR WHICH THIS SCRIPT REQUESTS AUTHORIZATION
   SCOPE = 'https://www.googleapis.com/auth/youtube'
+
+  APPLICATION_NAME = 'funny_videos'
 
   def authorize
     FileUtils.mkdir_p(File.dirname(CREDENTIALS_PATH))

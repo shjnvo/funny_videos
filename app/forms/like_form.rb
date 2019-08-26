@@ -2,7 +2,7 @@ class LikeForm
   attr_accessor :uuid, :status
 
   def initialize(uuid, user, status)
-    @youtube_service = YoutubeService.new
+    @video_service = VideoService.new
     @uuid = uuid
     @status = status
     @user = user
@@ -19,7 +19,7 @@ class LikeForm
       likeable.status = @status
 
       if likeable.save
-        @youtube_service.video_action_by(@uuid, @status)
+        @video_service.rate_video(@uuid, @status)
       else
         @error = likeable.error.full_messages.join(', ')
       end
