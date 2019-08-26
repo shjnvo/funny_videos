@@ -1,10 +1,16 @@
 class VideoDecorator < Draper::Decorator
   delegate_all
 
+  delegate :current_page, :total_pages, :limit_value
+
   def initialize(object, options = {})
     super
     @video_service = VideoService.new
     @video_info = @video_service.list_videos({id: object.uuid}).first
+  end
+
+  def self.collection_decorator_class
+    PaginatingDecorator
   end
 
   def email

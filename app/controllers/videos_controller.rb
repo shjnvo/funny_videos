@@ -1,7 +1,7 @@
 class VideosController < ApplicationController
   before_action :authenticate_user, only: :share
   def index
-    @videos = Video.includes(:user).all.decorate
+    @videos = Video.includes(:user).page(params[:page]).per(5).decorate
   end
 
   def share
