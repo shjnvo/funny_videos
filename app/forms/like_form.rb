@@ -2,7 +2,7 @@ class LikeForm
   attr_accessor :uuid, :status
 
   def initialize(uuid, user, status)
-    @video_service = VideoService.new
+    @video_service = YoutubeService.new
     @uuid = uuid
     @status = status
     @user = user

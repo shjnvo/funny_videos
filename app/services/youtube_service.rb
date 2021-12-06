@@ -1,13 +1,13 @@
 class YoutubeService
   include HTTParty
-  base_uri 'https://www.googleapis.com'
+  base_uri 'https://youtube.googleapis.com'
 
   YOUTUBE_REGEX = /(https?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.*(?:watch\?v=)?([-\w]{11})/
 
   def initialize
     @option = {
       query: {
-        key: "AIzaSyBd7lNjNqVUpzTRCabe0-DZRkt4OmxxYN8"
+        key: "AIzaSyAQ3DyijfPwAU1jbSPzUjai9dJ3MkO5i5w"
       },
       headers: {}
     }
@@ -15,9 +15,9 @@ class YoutubeService
 
   def take_info_video_by_ids(*video_id)
     @option[:query][:id] = video_id.join(',')
-    @option[:query][:fields] = "items(id,snippet(title,description),statistics)"
-    @option[:query][:part] = "snippet,statistics"
-    response = self.class.get("/youtube/v3/videos", @option)
+    # @option[:query][:fields] = "items(id,snippet(title,description),statistics)"
+    @option[:query][:part] = "snippet,contentDetails,statistics"
+    response = self.class.get('/youtube/v3/videos', @option)
 
     Rails.logger.debug(response)
 
@@ -35,12 +35,5 @@ class YoutubeService
 
     # in YOUTUBE_REGEX with group 6 is video_id
     video_id = matched ? matched[6] : nil
-  end
-
-  def video_action_by(video_id, action)
-    @option[:query][:id] = video_id
-    @option[:query][:rating] = action
-    @option[:headers]['Authorization'] = "Bearer ya29.GltvB33LKZ3DMVV5NvlzMXXC44_WYOC502mQKkgmmR96rHAfP0pqQtTKdumiIVVHhEGQ3c5mKCMGXlCkRHq21BVqwTgp4IuywaXyQOp8tTP0m_HVsHrRSoNOdRyC"
-    response = self.class.post("/youtube/v3/videos/rate", @option)
   end
 end

@@ -5,8 +5,8 @@ class VideoDecorator < Draper::Decorator
 
   def initialize(object, options = {})
     super
-    @video_service = VideoService.new
-    @video_info = @video_service.list_videos({id: object.uuid}).first
+    @video_service = YoutubeService.new
+    @video_info = @video_service.take_info_video_by_ids(object.uuid).first
   end
 
   def self.collection_decorator_class
